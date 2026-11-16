@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#100b20">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Farkle">
+  <meta name="description" content="A clean, ad-free Farkle scorekeeper for family and friends.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <title>Farkle</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">Farkle</div>
+      <div class="top-actions">
+        <button class="icon-btn" id="historyBtn" aria-label="Turn history" title="Turn history">▥</button>
+        <button class="icon-btn" id="newGameBtn" aria-label="New game" title="New game">＋</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="gameScreen" class="screen active">
+        <div id="players" class="players"></div>
+        <div class="turn-label" id="turnLabel">Maya's turn</div>
+
+        <section class="score-panel">
+          <div id="stackLine" class="stack-line"></div>
+          <div id="entryScore" class="entry-score">0</div>
+          <div class="score-divider"></div>
+          <div class="total-line">Turn total <strong id="turnTotal">0</strong></div>
+        </section>
+        <div class="hint" id="scoreHint">Enter your score</div>
+
+        <div class="keypad" aria-label="Score keypad">
+          <button class="key" data-key="1">1</button><button class="key" data-key="2">2</button><button class="key" data-key="3">3</button>
+          <button class="key" data-key="4">4</button><button class="key" data-key="5">5</button><button class="key" data-key="6">6</button>
+          <button class="key" data-key="7">7</button><button class="key" data-key="8">8</button><button class="key" data-key="9">9</button>
+          <button class="key key-special key-00" data-key="00">00</button><button class="key" data-key="0">0</button>
+          <button class="key key-special key-50" data-key="50">50</button><button class="key key-plus" data-key="+">＋</button>
+        </div>
+
+        <div class="game-actions">
+          <button class="action-btn subtle" id="undoBtn">Undo</button>
+          <button class="action-btn subtle" id="clearBtn">Clear</button>
+          <button class="action-btn farkle" id="farkleBtn">Farkle</button>
+          <button class="action-btn bank" id="bankBtn">Bank 0</button>
+        </div>
+        <div class="farkle-count" id="farkleCount"></div>
+      </section>
+
+      <section id="newGameScreen" class="screen sheet-screen">
+        <div class="sheet">
+          <div class="sheet-handle"></div>
+          <div class="sheet-heading"><h1>New Game</h1><button class="close-btn" data-close>×</button></div>
+          <div id="playerEditor" class="player-editor"></div>
+          <button class="add-player" id="addPlayerBtn">＋ <span>Add player</span></button>
+          <div class="settings-card">
+            <label class="target-row">Target score
+              <span class="stepper"><button id="targetMinus">−</button><strong id="targetValue">10,000</strong><button id="targetPlus">＋</button></span>
+            </label>
+            <label class="toggle-row"><span>Need 500 to get on board</span><input type="checkbox" id="boardToggle" checked><i></i></label>
+          </div>
+          <button class="primary-btn" id="startGameBtn">Start game</button>
+        </div>
+      </section>
+
+      <section id="historyScreen" class="screen sheet-screen">
+        <div class="sheet history-sheet">
+          <div class="sheet-handle"></div>
+          <div class="sheet-heading"><h1>Turn History</h1><button class="close-btn" data-close>×</button></div>
+          <div class="chart-wrap"><canvas id="historyChart" height="190"></canvas></div>
+          <div id="chartLegend" class="chart-legend"></div>
+          <div id="historyRounds" class="history-rounds"></div>
+          <button class="secondary-btn" data-close>Back to game</button>
+        </div>
+      </section>
+
+      <section id="winnerScreen" class="screen winner-screen">
+        <button class="close-winner" id="winnerClose">×</button>
+        <div class="confetti" aria-hidden="true">◆　✦　◆　✧　◆　✦　◆</div>
+        <div class="dice-art" aria-hidden="true"><span>⚄</span><span>⚁</span></div>
+        <h1 id="winnerName">Maya wins!</h1>
+        <div class="winner-score" id="winnerScore">10,250</div>
+        <div id="finalScores" class="final-scores"></div>
+        <button class="primary-btn" id="playAgainBtn">Play again</button>
+      </section>
+    </main>
+    <div class="toast" id="toast" role="status"></div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
